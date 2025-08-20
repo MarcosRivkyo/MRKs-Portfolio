@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Particles from 'react-tsparticles'
 import { loadFull } from 'tsparticles'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
@@ -20,26 +19,6 @@ export default function Home({ posts }) {
     <>
       {/* Hero animado con fondo tipo Matrix */}
 <section className="relative min-h-screen w-full overflow-hidden bg-transparent">
-  {/* Partículas tipo Matrix */}
-  <Particles
-    id="tsparticles"
-    init={particlesInit}
-    options={{
-      background: { color: { value: "transparent" } },
-      fpsLimit: 60,
-      interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } } },
-      particles: {
-        color: { value: "#0f0" },
-        move: { direction: "bottom", enable: true, outModes: "out", speed: 2 },
-        number: { density: { enable: true, area: 800 }, value: 150 },
-        opacity: { value: 0.7 },
-        shape: { type: "char" },
-        size: { value: { min: 8, max: 16 } },
-        text: { value: ["0", "1"] },
-      },
-      detectRetina: true,
-    }}
-  />
 
   {/* Contenido de presentación */}
   <motion.div
