@@ -18,30 +18,27 @@ export default function Page() {
 
   return (
     <>
-  <AuthorLayout content={mainContent}>
-    <MDXLayoutRenderer code={author.body.code} />
+      <AuthorLayout content={mainContent}>
+        <MDXLayoutRenderer code={author.body.code} />
 
-    {/* Education */}
-    <div className="pt-8">
-      <h2 className="text-3xl font-bold mb-4">Education</h2>
-      <Timeline items={educationData} />
-    </div>
+        {/* Education */}
+        <div className="pt-8">
+          <h2 className="mb-4 text-3xl font-bold">Education</h2>
+          <Timeline items={educationData} />
+        </div>
 
-    {/* Experience */}
-    <div className="pt-8">
-      <h2 className="text-3xl font-bold mb-4">Experience</h2>
-      <Timeline items={experienceData} />
-    </div>
+        {/* Experience */}
+        <div className="pt-8">
+          <h2 className="mb-4 text-3xl font-bold">Experience</h2>
+          <Timeline items={experienceData} />
+        </div>
 
-    {/* Certificates */}
-    <div className="pt-8">
-      <h2 className="text-3xl font-bold mb-4">Certificates</h2>
-      <Timeline items={certificatesData} />
-    </div>
-  </AuthorLayout>
-
+        {/* Certificates */}
+        <div className="pt-8">
+          <h2 className="mb-4 text-3xl font-bold">Certificates</h2>
+          <Timeline items={certificatesData} />
+        </div>
+      </AuthorLayout>
     </>
   )
 }
-
-

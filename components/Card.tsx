@@ -42,17 +42,12 @@ const Card = ({ title, description, imgSrc, href }) => (
         {/* ✅ Handle description as array (multiple paragraphs) or string */}
         {Array.isArray(description) ? (
           description.map((para, idx) => (
-            <p
-              key={idx}
-              className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400"
-            >
+            <p key={idx} className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
               {para}
             </p>
           ))
         ) : (
-          <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
-            {description}
-          </p>
+          <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
         )}
 
         {href && (

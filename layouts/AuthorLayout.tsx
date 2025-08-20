@@ -20,7 +20,7 @@ export default function AuthorLayout({ children, content }: Props) {
             About
           </h1>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0 xl:gap-x-8">
           <div className="flex flex-col items-center space-x-2 pt-8">
             {avatar && (
               <Image
@@ -41,11 +41,11 @@ export default function AuthorLayout({ children, content }: Props) {
               <SocialIcon kind="x" href={twitter} />
               <SocialIcon kind="bluesky" href={bluesky} />
             </div>
-            <div className="max-w-3xl mx-auto mt-12 px-4 text-center">
-              <h2 className="text-3xl font-bold mb-4">Curriculum</h2>
+            <div className="mx-auto mt-12 max-w-3xl px-4 text-center">
+              <h2 className="mb-4 text-3xl font-bold">Curriculum</h2>
               <Link
                 href="/static/files/MarcosRivasKyoguro_CV.pdf"
-                className="inline-block px-6 py-3 text-white bg-primary-500 hover:bg-primary-600 rounded-lg shadow-lg transition"
+                className="bg-primary-500 hover:bg-primary-600 inline-block rounded-lg px-6 py-3 text-white shadow-lg transition"
                 target="_blank"
               >
                 📄 Download CV
@@ -56,9 +56,7 @@ export default function AuthorLayout({ children, content }: Props) {
             {children}
           </div>
         </div>
-
       </div>
-
     </>
   )
 }

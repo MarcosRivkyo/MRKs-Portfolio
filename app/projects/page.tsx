@@ -13,11 +13,10 @@ export default function Projects() {
             Projects
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            A selection of my academic, professional, and personal projects —
-            from AI research to game development. Each project reflects my passion
-            for solving problems and building innovative solutions.
+            A selection of my academic, professional, and personal projects — from AI research to
+            game development. Each project reflects my passion for solving problems and building
+            innovative solutions.
           </p>
-
         </div>
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">
