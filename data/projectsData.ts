@@ -29,7 +29,7 @@ const projectsData = [
       'The project showcases skills in game design, Blueprints scripting, and animation integration with Mixamo assets.',
       'It reflects my ability to build engaging, interactive experiences with a focus on gameplay mechanics.',
     ],
-    imgSrc: '/static/images/piratebomb.png',
+    imgSrc: '/static/images/pirate_bomb.png',
     href: 'https://github.com/MarcosRivkyo/Unity---Pirate-Bombs',
   },
   {
@@ -40,11 +40,11 @@ const projectsData = [
       'It demonstrates my skills in gameplay programming, UI design, and system architecture within UE5.',
       'The project highlights creativity and technical problem-solving in a post-apocalyptic setting.',
     ],
-    imgSrc: '/static/images/after-twd.png',
+    imgSrc: '/static/images/after_twd.png',
     href: 'https://github.com/MarcosRivkyo/Unreal-Engine---After-The-Walking-Dead',
   },
   {
-    title: 'Diaweb',
+    title: 'Diaserver',
     description: [
       'A web application developed to support diabetes management and awareness.',
       'The platform provides tools for tracking glucose levels, monitoring habits, and accessing educational content.',
@@ -73,7 +73,7 @@ const projectsData = [
       'Despite being text-based, it delivers a functional and enjoyable gameplay experience.',
       'This project reflects my ability to build complex logic and structured programs even in low-level scripting environments.',
     ],
-    imgSrc: '/static/images/domino-shell.png',
+    imgSrc: '/static/images/domino.png',
     href: 'https://github.com/MarcosRivkyo/DominoGameShell',
   },
 ]
