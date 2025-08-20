@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { loadFull } from 'tsparticles'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -11,64 +10,59 @@ import NewsletterForm from 'pliny/ui/NewsletterForm'
 const MAX_DISPLAY = 5
 
 export default function Home({ posts }) {
-  const particlesInit = async (main: any) => {
-    await loadFull(main)
-  }
-
   return (
     <>
       {/* Hero animado con fondo tipo Matrix */}
-<section className="relative min-h-screen w-full overflow-hidden bg-transparent">
+      <section className="relative min-h-screen w-full overflow-hidden bg-transparent">
+        {/* Contenido de presentación */}
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center"
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+        >
+          <motion.img
+            src="/static/images/avatar.png"
+            alt="My Avatar"
+            className="mb-6 h-32 w-32 rounded-full border-4 border-green-500 shadow-lg md:h-40 md:w-40"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 1 }}
+          />
 
-  {/* Contenido de presentación */}
-  <motion.div
-    className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
-    initial={{ opacity: 0, y: 40, scale: 0.95 }}
-    animate={{ opacity: 1, y: 0, scale: 1 }}
-    transition={{ duration: 1, ease: "easeOut" }}
-  >
-    <motion.img
-      src="/static/images/avatar.png"
-      alt="My Avatar"
-      className="w-32 h-32 md:w-40 md:h-40 rounded-full mb-6 border-4 border-green-500 shadow-lg"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.2, duration: 1 }}
-    />
+          <motion.h1
+            className="mb-4 text-5xl font-extrabold text-green-400 md:text-6xl"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 1 }}
+          >
+            Welcome to my portfolio
+          </motion.h1>
 
-    <motion.h1
-      className="text-5xl md:text-6xl font-extrabold text-green-400 mb-4"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4, duration: 1 }}
-    >
-      Welcome to my portfolio
-    </motion.h1>
-
-    <motion.p
-      className="text-lg md:text-xl text-green-700 mb-2" // Ajustado para modo claro
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.7, duration: 1.2 }}
-    >
-      Here you can explore my projects, skills, and professional journey.
-    </motion.p>
-    <motion.p
-      className="text-lg md:text-xl text-green-700" // Ajustado para modo claro
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.9, duration: 1.2 }}
-    >
-      Feel free to browse through my work and learn more about my expertise in web development and design.
-    </motion.p>
-  </motion.div>
-</section>
-
+          <motion.p
+            className="mb-2 text-lg text-green-700 md:text-xl" // Ajustado para modo claro
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 1.2 }}
+          >
+            Here you can explore my projects, skills, and professional journey.
+          </motion.p>
+          <motion.p
+            className="text-lg text-green-700 md:text-xl" // Ajustado para modo claro
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9, duration: 1.2 }}
+          >
+            Feel free to browse through my work and learn more about my expertise in web development
+            and design.
+          </motion.p>
+        </motion.div>
+      </section>
 
       {/* Lista de posts con animación */}
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 mt-20">
+      <div className="mt-20 divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h2 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100 text-center">
+          <h2 className="text-center text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100">
             Recent Posts
           </h2>
         </div>
@@ -96,12 +90,17 @@ export default function Home({ posts }) {
                     <div className="space-y-6">
                       <div>
                         <h3 className="text-2xl leading-8 font-bold tracking-tight">
-                          <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100 hover:text-primary-500 transition">
+                          <Link
+                            href={`/blog/${slug}`}
+                            className="hover:text-primary-500 text-gray-900 transition dark:text-gray-100"
+                          >
                             {title}
                           </Link>
                         </h3>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {tags.map((tag) => <Tag key={tag} text={tag} />)}
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {tags.map((tag) => (
+                            <Tag key={tag} text={tag} />
+                          ))}
                         </div>
                       </div>
                       <div className="prose max-w-none text-gray-500 dark:text-gray-400">
@@ -126,7 +125,7 @@ export default function Home({ posts }) {
       </div>
 
       {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base leading-6 font-medium mt-6">
+        <div className="mt-6 flex justify-end text-base leading-6 font-medium">
           <Link
             href="/blog"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition"
