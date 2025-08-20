@@ -6,20 +6,51 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
+import { useState } from 'react'
 
 const MAX_DISPLAY = 5
 
+// Carrusel simple
+const images = [
+  '/static/images/image_carrousel_1.png',
+  '/static/images/image_carrousel_2.png',
+  '/static/images/image_carrousel_3.png',
+]
+
 export default function Home({ posts }) {
+  const [current, setCurrent] = useState(0)
+
+  // Cambiar de imagen cada 3s
+  useState(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length)
+    }, 8000)
+    return () => clearInterval(interval)
+  })
+
   return (
     <>
-      {/* Hero animado con fondo tipo Matrix */}
-      <section className="relative min-h-screen w-full overflow-hidden bg-transparent">
-        {/* Contenido de presentación */}
+      {/* Hero en 2 columnas */}
+      <section className="relative grid w-full grid-cols-1 py-20 md:grid-cols-2">
+        {/* Mitad izquierda: carrusel */}
+        <div className="flex h-96 w-full items-center justify-center overflow-hidden rounded-xl bg-gray-100 shadow-lg dark:bg-gray-900">
+          <motion.img
+            key={current}
+            src={images[current]}
+            alt="Portfolio slide"
+            className="h-full w-full object-cover"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          />
+        </div>
+
+        {/* Mitad derecha: texto */}
         <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center"
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          className="flex flex-col items-center justify-center px-6 text-center"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
         >
           <motion.img
             src="/static/images/avatar.png"
@@ -40,7 +71,7 @@ export default function Home({ posts }) {
           </motion.h1>
 
           <motion.p
-            className="mb-2 text-lg text-green-700 md:text-xl" // Ajustado para modo claro
+            className="mb-2 text-lg text-green-700 md:text-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7, duration: 1.2 }}
@@ -48,7 +79,7 @@ export default function Home({ posts }) {
             Here you can explore my projects, skills, and professional journey.
           </motion.p>
           <motion.p
-            className="text-lg text-green-700 md:text-xl" // Ajustado para modo claro
+            className="text-lg text-green-700 md:text-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 1.2 }}
@@ -59,10 +90,10 @@ export default function Home({ posts }) {
         </motion.div>
       </section>
 
-      {/* Lista de posts con animación */}
+      {/* Lista de posts */}
       <div className="mt-20 divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h2 className="text-center text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100">
+          <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100">
             Recent Posts
           </h2>
         </div>
@@ -82,14 +113,14 @@ export default function Home({ posts }) {
                 <article className="space-y-4 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                   <dl>
                     <dt className="sr-only">Published on</dt>
-                    <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
+                    <dd className="text-base font-medium text-gray-500 dark:text-gray-400">
                       <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                     </dd>
                   </dl>
                   <div className="space-y-5 xl:col-span-3">
                     <div className="space-y-6">
                       <div>
-                        <h3 className="text-2xl leading-8 font-bold tracking-tight">
+                        <h3 className="text-2xl font-bold tracking-tight">
                           <Link
                             href={`/blog/${slug}`}
                             className="hover:text-primary-500 text-gray-900 transition dark:text-gray-100"
@@ -107,7 +138,7 @@ export default function Home({ posts }) {
                         {summary}
                       </div>
                     </div>
-                    <div className="text-base leading-6 font-medium">
+                    <div className="text-base font-medium">
                       <Link
                         href={`/blog/${slug}`}
                         className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition"
@@ -125,7 +156,7 @@ export default function Home({ posts }) {
       </div>
 
       {posts.length > MAX_DISPLAY && (
-        <div className="mt-6 flex justify-end text-base leading-6 font-medium">
+        <div className="mt-6 flex justify-end text-base font-medium">
           <Link
             href="/blog"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition"

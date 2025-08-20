@@ -11,6 +11,7 @@ import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
+import PageTransitionLayout from '@/components/PageTransitionLayout'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -100,7 +101,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SectionContainer>
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
-              <main className="mb-auto">{children}</main>
+              <main className="mb-auto">
+                <PageTransitionLayout>{children}</PageTransitionLayout>
+              </main>
             </SearchProvider>
             <Footer />
           </SectionContainer>
