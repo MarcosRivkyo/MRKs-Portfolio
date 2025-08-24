@@ -1,11 +1,11 @@
 'use client'
 import * as React from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { auth } from '@/lib/firebaseClient'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
-export default function LoginPage() {
-  const router = useRouter()
+function LoginInner() {
   const params = useSearchParams()
 
   // Sanea ?next -> solo rutas internas a /apps
@@ -48,7 +48,6 @@ export default function LoginPage() {
       window.location.assign(
         ((): string => {
           const raw = new URLSearchParams(window.location.search).get('next')
-          // Sanea: solo /apps (y subrutas)
           if (raw && raw.startsWith('/apps')) return raw
           return '/apps'
         })()
@@ -132,5 +131,19 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  )
+}
+
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <main className="container mx-auto px-4 py-8">
+          <div className="text-gray-600 dark:text-gray-300">Cargando…</div>
+        </main>
+      }
+    >
+      <LoginInner />
+    </Suspense>
   )
 }
