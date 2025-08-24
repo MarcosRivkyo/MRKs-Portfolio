@@ -1,17 +1,34 @@
+// components/Header.tsx
+'use client'
+
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import Image from 'next/image'
+import { useAuth } from '@/components/auth/AuthProvider'
 
-const Header = () => {
+// components/Header.tsx (solo el botón)
+function HeaderButton() {
+  const { user, loading } = useAuth()
+  if (loading)
+    return <span className="rounded-lg px-3 py-2 text-sm font-semibold opacity-60">Cargando…</span>
+  const href = user ? '/apps' : `/login?next=${encodeURIComponent('/apps')}`
+  return (
+    <Link
+      className="bg-primary-600 hover:bg-primary-700 rounded-lg px-3 py-2 text-sm font-semibold text-white"
+      href={href}
+    >
+      Aplicaciones
+    </Link>
+  )
+}
+
+export default function Header() {
   let headerClass = 'flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10'
-  if (siteMetadata.stickyNav) {
-    headerClass += ' sticky top-0 z-50'
-  }
+  if (siteMetadata.stickyNav) headerClass += ' sticky top-0 z-50'
 
   return (
     <header className={headerClass}>
@@ -29,6 +46,7 @@ const Header = () => {
           )}
         </div>
       </Link>
+
       <div className="flex items-center space-x-4 leading-5 sm:-mr-6 sm:space-x-6">
         <div className="no-scrollbar hidden max-w-40 items-center gap-x-4 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96">
           {headerNavLinks.map((link) => (
@@ -41,6 +59,8 @@ const Header = () => {
             </Link>
           ))}
         </div>
+
+        <HeaderButton />
         <SearchButton />
         <ThemeSwitch />
         <MobileNav />
@@ -48,5 +68,3 @@ const Header = () => {
     </header>
   )
 }
-
-export default Header
